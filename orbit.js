@@ -10,8 +10,8 @@ const DEFAULT_DISTANCE = 30;
 **************************************/
 
 var Schema = mongoose.Schema;
-var Item = new Schema();
-Item.add({
+var ItemSchema = new Schema();
+ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, default: '', trim: true },
@@ -22,7 +22,7 @@ Item.add({
 		lat : Number
 	}
 });
-Item.index({
+ItemSchema.index({
 	location : "2d"
 });
 mongoose.connect('mongodb://127.0.0.1:27017/orbit', function (err) {
@@ -31,7 +31,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/orbit', function (err) {
 });
 
 //save to collection "items"
-var ItemModel = mongoose.model('items', Item);
+var Item = mongoose.model('items', ItemSchema);
 
 /*************************************/
 /* Express
@@ -52,7 +52,7 @@ app.configure(function(){
 // POST
 app.post('/', function(req, res){ 
 	
-	var item = new ItemModel();
+	var item = new Item();
 	item.location.lon = parseFloat(req.query["lon"]);
 	item.location.lat = parseFloat(req.query["lat"]);
 	item.url = req.query["url"];
@@ -85,7 +85,7 @@ app.get('/', function(req, res){
 	var maxDistance = parseFloat(req.query["distance"]) || DEFAULT_DISTANCE;
 
 	var items = [];
-	ItemModel.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
+	Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
         if (err) { throw err };
 		
 		if (req.is("application/json")) {
