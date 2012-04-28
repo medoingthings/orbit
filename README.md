@@ -5,7 +5,7 @@ Orbit is a tool to store and share URI based on your current location
 ## Development ##
 
 	brew install mongodb
-	git clone git://github.com/oschrenk/orbit-backend.git
+	git clone git://github.com/zix2c/orbit.git
 	npm install
 
 Dependencies
