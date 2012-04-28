@@ -66,7 +66,7 @@ app.get('/', function(req, res){
 			res.json(items, 200);
 		} 
 		
-		if (req.is("text/html")) {
+		if (req.accepts("text/html")) {
 			res.render('items', {
 				title: 'Orbit',
 				items: items,
