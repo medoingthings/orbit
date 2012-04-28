@@ -48,14 +48,14 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
-	
-// Routing
+
+// get
 app.get('/', function(req, res){
 	
 	var label = req.route.path || '/';
 	var lon = parseFloat(req.query["lon"]);
 	var lat = parseFloat(req.query["lat"]);
-	var maxDistance = isNaN(parseFloat(req.query["distance"])) ? DEFAULT_DISTANCE : parseFloat(req.query["distance"]);
+	var maxDistance = parseFloat(req.query["distance"]) || DEFAULT_DISTANCE;
 
 	var items = [];
 	ItemModel.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
