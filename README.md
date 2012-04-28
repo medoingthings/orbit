@@ -6,6 +6,8 @@ Orbit is a tool to store and share URI based on your current location
 
 	brew install mongodb
 	git clone git://github.com/zix2c/orbit.git
+	npm install vows -g
+	cd orbit
 	npm install
 
 Dependencies
@@ -83,7 +85,9 @@ Start mongoDB shell and store an exampe item
 		}
 	);
 	
-### Queries ###
+### Mongoose ###
+
+	var i
 
 Search for *label only*
 

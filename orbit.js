@@ -49,7 +49,34 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-// get
+// POST
+app.post('/', function(req, res){ 
+	
+	var item = new ItemModel();
+	item.location.lon = parseFloat(req.query["lon"]);
+	item.location.lat = parseFloat(req.query["lat"]);
+	item.url = req.query["url"];
+	item.title = req.query["title"] || '';
+	
+	item.save(function(err){
+		if(!err){
+			console.log('Item saved');
+			
+			res.render('bookmarklet-success', {
+				title: 'Orbit',
+				layout: 'layout-bookmarklet'
+			});
+		} else {
+			res.render('bookmarklet-fail', {
+				title: 'Orbit',
+				layout: 'layout-bookmarklet'
+			});
+		}
+    });
+});
+
+
+// GET
 app.get('/', function(req, res){
 	
 	var label = req.route.path || '/';
@@ -66,16 +93,13 @@ app.get('/', function(req, res){
 			res.json(items, 200);
 		} 
 		
-		if (req.accepts("text/html")) {
-			res.render('items', {
+		else if (req.accepts("text/html")) {
+			res.render('index', {
 				title: 'Orbit',
 				items: items,
-				layout: 'layout'
+				layout: 'layout-default'
 			});
 		}
-		
-		
-		res.end();
     });
 	
 });
