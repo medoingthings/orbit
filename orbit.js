@@ -14,7 +14,7 @@ var ItemSchema = new Schema();
 ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
-	label		: { type: String, index: true, default: '', trim: true },
+	label		: { type: String, index: true, trim: true },
 	timestamp	: { type: Date, default: Date.now },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
