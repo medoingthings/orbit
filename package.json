@@ -9,10 +9,10 @@
     "private": true,
 	"repository": {
         "type": "git",
-        "url": "https://github.com/oschrenk/orbit-backend"
+        "url": "git://github.com/zix2c/orbit.git"
     },
     "bugs": {
-        "url": "http://github.com/oschrenk/orbit-backend/issues"
+        "url": "https://github.com/zix2c/orbit/issues"
     },
     "dependencies": {
         "mongoose": "2.5.13",
