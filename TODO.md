@@ -4,6 +4,7 @@
 - Geocoding von LatLng und Anzeige von Adressen
 - Automatisches Schließen des Bokmarklets in x Sekunden
 - Automatisches Säubern von Einträgen anhand des Expire Timestamps
+- Bookmarklet funktioniert nicht bei Seiten, die selbst iFrame einsetzen
 - Prüfung des Inhaltes (Injections verhindern)
 - Echzeitintegration
 - Auslesen und Mitangabe von Metadaten der Seiten
