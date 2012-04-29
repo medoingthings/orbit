@@ -3,14 +3,14 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/bookmarklet.css')
-    script(src='javascripts/lib/jquery-1.7.2.js')
+    script(src='javascripts/libs/jquery-1.7.2.js')
     script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
     script
 
       // send data to the server
       $.ajax({
         type: "POST",
-        url: "http://orbit2.herokuapp.com/?lat=#{item.location.lat}&lon=#{item.location.lon}&title=title-goes-here&url=url-goes-here,
+        url: "http://orbit2.herokuapp.com/?lat=#{item.location.lat}&lon=#{item.location.lon}&title=title-goes-here&url=url-goes-here",
         success: function(data, textStatus){
         }
       });
@@ -21,7 +21,7 @@ html
       var map;
       function initialize() {
         var mapOptions = {
-        zoom: 13,
+        zoom: 12,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         center: thisLocation,
         disableDefaultUI: true
