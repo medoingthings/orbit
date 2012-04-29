@@ -22,7 +22,7 @@
 
           function initialize() {
             var mapOptions = {
-              zoom: 13,
+              zoom: 12,
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               center: thisLocation,
               disableDefaultUI: true
@@ -66,6 +66,6 @@
 </script>
 </head>
 <body onload="initialize()">
-<div id="map_canvas" style="width: 500px; height: 500px;">map div</div>
+<div id="map_canvas" style="width: 120px; height: 120px;">map div</div>
 </body>
 </html>
