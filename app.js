@@ -126,11 +126,6 @@ app.get('/', function(req, res){
 						item: item,
 						layout: 'layout-bookmarklet'
 					});
-				} else {
-					res.render('bookmarklet-fail', {
-						title: 'Orbit',
-						layout: 'layout-bookmarklet'
-					});
 				}
 		    });
 		} 
