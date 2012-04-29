@@ -1,4 +1,8 @@
+// node.js
+var fs = require('fs');
 var http = require('http');
+
+// npm modules
 var express = require('express');
 var mongoose = require('mongoose');
 
@@ -8,7 +12,10 @@ const HOUR = 60 * MINUTE;
 
 // TODO unit
 const DEFAULT_DISTANCE = 30;
-const DEFAULT_LIFETIME = HOUR
+const DEFAULT_LIFETIME = HOUR;
+
+const HHTTP_OK = 200;
+const HTTP_FAIL = 404;
 
 /**************************************
  * Mongoose Schema Definition 
@@ -57,9 +64,31 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
+// POST http://orb.it/?lat=x&lon=y&url=...&title=... => 200, 404
+app.post('/', function(req, res){
+	var item = new Item();
+	item.location.lon = parseFloat(req.query["lon"]);
+	item.location.lat = parseFloat(req.query["lat"]);
+	item.url = req.query["url"];
+	item.title = req.query["title"] || '';
+
+	item.save(function(err){
+		if(!err){
+			console.log('Item saved');
+			res.send(HTTP_OK);
+		} else {
+			res.send(HTTP_FAIL);
+		}
+    });
+});
+
+// GET / 
 app.get('/', function(req, res){
 	
-	// GET / => JSON
+	// get bookmarklets as json
+	// GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
+	// Accept: application/json
+	// => json, 200
 	if (req.accepts("application/json")) {
 		
 		console.log(req);
@@ -68,7 +97,7 @@ app.get('/', function(req, res){
 			var label = req.route.path || '/';
 			var lon = parseFloat(req.query["lon"]) || 0;
 			var lat = parseFloat(req.query["lat"]) || 0;
-			var maxDistance = parseFloat(req.query["distance"]) || DEFAULT_DISTANCE;
+			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
 
 			Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
 		        if (err) { 
@@ -86,6 +115,10 @@ app.get('/', function(req, res){
 	
 	else if (req.accepts("text/html")) {
 		
+		// render bookmarklet
+		// GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
+		// Accept: text/html
+		// => HTML, 200
 		if (req.query["bookmarklet"] === true) {
 			var item = new Item();
 			item.location.lon = parseFloat(req.query["lon"]);
@@ -109,11 +142,16 @@ app.get('/', function(req, res){
 					});
 				}
 		    });
-		} else {
-			res.render('index', {
-				title: 'Orbit',
-				layout: 'layout-default'
-			});
+		} 
+		
+		else {
+			// render index
+			// GET http://orbit2.herokuapp.com/
+			// Accept: text/html
+			// => HTML, 200
+			console.log('render index');
+			var indexTemplate = fs.readFileSync(__dirname + '/public/index.html', 'utf8');
+			res.send(indexTemplate);
 		}
 	}
 	
