@@ -31,7 +31,9 @@ ItemSchema.add({
 ItemSchema.index({
 	location : "2d"
 });
-mongoose.connect('mongodb://127.0.0.1:27017/orbit', function (err) {
+
+var mongoURL = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/orbit';
+mongoose.connect(mongoURL, function (err) {
 	if (err) {console.log("error in mongo connection"); throw err; }
 	console.log("connected to mongo");
 });

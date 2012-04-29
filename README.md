@@ -29,6 +29,20 @@ Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku
 	Creating stark-fog-398... done, stack is cedar
 	http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
 	Git remote heroku added
+	
+Create database
+
+	heroku addons:add mongolab:starter
+
+Deploy and run
+
+	git push heroku master
+	heroku ps:scale web=1
+
+Check the process
+
+	heroku ps
+	heroku logs
 
 ### Layout ###
 
