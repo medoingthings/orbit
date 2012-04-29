@@ -60,6 +60,8 @@ app.configure(function(){
 // POST
 app.post('/', function(req, res){ 
 	
+	console.log("POST");
+	
 	var item = new Item();
 	item.location.lon = parseFloat(req.query["lon"]);
 	item.location.lat = parseFloat(req.query["lat"]);
@@ -88,28 +90,34 @@ app.post('/', function(req, res){
 // GET
 app.get('/', function(req, res){
 	
-	var label = req.route.path || '/';
-	var lon = parseFloat(req.query["lon"]);
-	var lat = parseFloat(req.query["lat"]);
-	var maxDistance = parseFloat(req.query["distance"]) || DEFAULT_DISTANCE;
+	if (req.is("application/json")) {
+		
+		if (req.query["lon"] !== null && req.query["lat"] !== null) {
+			var label = req.route.path || '/';
+			var lon = parseFloat(req.query["lon"]) || 0;
+			var lat = parseFloat(req.query["lat"]) || 0;
+			var maxDistance = parseFloat(req.query["distance"]) || DEFAULT_DISTANCE;
 
-	var items = [];
-	Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
-        if (err) { throw err };
-		
-		if (req.is("application/json")) {
-			// TODO strip object ids
-			res.json(items, 200);
-		} 
-		
-		else if (req.accepts("text/html")) {
-			res.render('index', {
-				title: 'Orbit',
-				items: items,
-				layout: 'layout-default'
-			});
+			Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
+		        if (err) { 
+					console.log("ERR" + err);
+					throw err 
+				} else {		
+					// TODO strip object ids
+					res.json(items, 200);
+				}
+		    });
+		} else {
+			res.json([], 404);
 		}
-    });
+	}
+	
+	else if (req.accepts("text/html")) {
+		res.render('index', {
+			title: 'Orbit',
+			layout: 'layout-default'
+		});
+	}
 	
 });
 
