@@ -78,11 +78,11 @@ function success(position) {
 								.attr('data-lat',bookmark.location.lat)
 								.attr('data-lon',bookmark.location.lon)
 								.attr('title',bookmark.created)
-								.append('<abbr title="' + jQuery.timeago(bookmark.created) + '">' + jQuery.timeago(bookmark.created) + '</abbr> ' + bookmark.title)
+								.append(bookmark.title)
 								.mouseover(function() {
 									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
 								})
-						)
+						).append(' <abbr title="' + jQuery.timeago(bookmark.created) + '">' + jQuery.timeago(bookmark.created) + '</abbr>')
 					);
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
