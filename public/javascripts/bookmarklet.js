@@ -2,7 +2,7 @@
 
 	// inject CSS file
 	var s = document.createElement('link');
-	s.setAttribute('href','http://localhost/stylesheets/bookmarklet.css');
+	s.setAttribute('href','http://orbi2.herokuapp.com/stylesheets/bookmarklet.css');
 	s.setAttribute('rel','stylesheet');
 	s.setAttribute('type','text/css');
 	document.getElementsByTagName('head')[0].appendChild(s);
@@ -55,7 +55,7 @@
 
 
 				// add location infos to the layer
-				var locationInfos = '<div class="orbit-site"><iframe src="http://localhost/maps.php?latitude=' + lat + '&longitude=' + lon + '"></iframe><h2 class="title">' + document.title + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
+				var locationInfos = '<div class="orbit-site"><iframe src="http://orbi2.herokuapp.com/?bookmarklet=true&lat=' + lat + '&lon=' + lon + '"></iframe><h2 class="title">' + document.title + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
 				$("#orbit-bookmarklet").html(locationInfos);
 
 				// close on click
