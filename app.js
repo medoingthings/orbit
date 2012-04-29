@@ -10,8 +10,8 @@ const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 
-// TODO unit
-const DEFAULT_DISTANCE = 3000;
+const EARTH_RADIUS = 6378000; 	// in m
+const DEFAULT_DISTANCE = 1000; 	// in m
 const DEFAULT_LIFETIME = HOUR;
 
 const HTTP_OK = 200;
