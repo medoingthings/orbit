@@ -58,10 +58,10 @@ function success(position) {
 	initialize();
 
 	// function that paints marker to the map
-	function paintMarker(latLon) {
+	function paintMarker(lat, lon) {
 		// paint marker for this item
 		new google.maps.Marker({
-			position: new google.maps.LatLng(50.9387812, 6.986600699999999),
+			position: new google.maps.LatLng(lat, lon),
 			map: map,
 			title:"Hello World!"
 		});
@@ -76,13 +76,13 @@ function success(position) {
 		type: "GET",
 		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
 		success: function(data){
-			paintMarker();
 			$.each (data, function (i, bookmark) {
 				if (bookmark.url) {
 					$('#bookmarks').append(
 						$('<li>').append(
 							$('<a>').attr('href',bookmark.url).append(bookmark.title)));
 
+					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
 			});
 		}
