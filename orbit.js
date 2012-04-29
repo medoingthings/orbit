@@ -90,7 +90,9 @@ app.post('/', function(req, res){
 // GET
 app.get('/', function(req, res){
 	
-	if (req.is("application/json")) {
+	if (req.accepts("application/json")) {
+		
+		console.log(req);
 		
 		if (req.query["lon"] !== null && req.query["lat"] !== null) {
 			var label = req.route.path || '/';
