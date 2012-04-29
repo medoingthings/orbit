@@ -80,9 +80,9 @@ function success(position) {
 								.append(bookmark.title)
 								.mouseover(function() {
 									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
-								}).
-								append(' at ' + bookmark.location.lat + ',' + bookmark.location.lon)
-						)
+								})
+						).
+						append(' at ' + bookmark.location.lat.toPrecision(6) + ',' + bookmark.location.lon.toPrecision(6))
 					);
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
