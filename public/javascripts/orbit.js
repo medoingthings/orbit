@@ -80,7 +80,7 @@ function success(position) {
 				if (bookmark.url) {
 					$('#bookmarks').append(
 						$('<li>').append(
-							$('<a>').attr('href',bookmark.url).append(bookmark.title)));
+							$('<a class="mapMarker">').attr('href',bookmark.url).attr('data-lat',bookmark.location.lat).attr('data-lon',bookmark.location.lon).append(bookmark.title)));
 
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
@@ -90,8 +90,10 @@ function success(position) {
 
 
 
-	$("h1").click(function() {
-		map.setCenter(new google.maps.LatLng( 50.9387401, 6.9865619 ) );
+	$(".mapMarker").mouseover(function() {
+		var lat = this.attr("data-lat");
+		var lon = this.attr("data-lon");
+		map.setCenter(new google.maps.LatLng(lat, lon ) );
 	});
 
 	function toggleBounce() {
