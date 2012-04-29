@@ -2,7 +2,6 @@
 // GET URLs from this place //
 // ======================= //
 
-
 // ================ //
 // Show Google Map //
 // ============== //
@@ -14,6 +13,7 @@ function success(position) {
 	lon = position.coords.longitude;
 	lat = position.coords.latitude;
 
+<<<<<<< Updated upstream
 // pull data from server
 	$.ajax({
 		headers: {
@@ -32,6 +32,8 @@ function success(position) {
 		}
 	});
 
+=======
+>>>>>>> Stashed changes
 
 	// =================================================
 	var thisLocation = new google.maps.LatLng(lat, lon);
@@ -57,6 +59,7 @@ function success(position) {
 			animation: google.maps.Animation.DROP,
 			position: thisLocation
 		});
+
 		google.maps.event.addListener(marker, 'click', toggleBounce);
 
 		// paint circle around currentLocation
@@ -75,6 +78,42 @@ function success(position) {
 
 	}
 	initialize();
+
+	// function that paints marker to the map
+	function paintMarker(latLon) {
+		// paint marker for this item
+		new google.maps.Marker({
+			position: new google.maps.LatLng(50.9387812, 6.986600699999999),
+			map: map,
+			title:"Hello World!"
+		});
+	}
+
+
+
+	// pull data from server
+	$.ajax({
+		headers: {
+			Accept : "application/json; charset=utf-8",
+					"Content-Type": "application/json; charset=utf-8"
+		},
+		type: "GET",
+		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+		success: function(data){
+			paintMarker();
+			$.each (data, function (i, bookmark) {
+				if (bookmark.url) {
+					$('#bookmarks').append(
+						$('<li>').append(
+							$('<a>').attr('href',bookmark.url).append(bookmark.title)));
+
+				}
+			});
+		}
+	});
+
+
+
 	$("h1").click(function() {
 		map.setCenter(new google.maps.LatLng( 50.9387401, 6.9865619 ) );
 	});
