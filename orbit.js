@@ -2,8 +2,13 @@ var http = require('http');
 var express = require('express');
 var mongoose = require('mongoose');
 
-// TODO unit?
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+
+// TODO unit
 const DEFAULT_DISTANCE = 30;
+const DEFAULT_LIFETIME = HOUR
 
 /**************************************
  * Mongoose Schema Definition 
@@ -11,11 +16,12 @@ const DEFAULT_DISTANCE = 30;
 
 var Schema = mongoose.Schema;
 var ItemSchema = new Schema();
+
 ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, trim: true },
-	timestamp	: { type: Date, default: Date.now },
+	timestamp	: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
 		lon : Number,
@@ -105,4 +111,5 @@ app.get('/', function(req, res){
 	
 });
 
-app.listen(3000);
+var port = process.env.PORT || 3000;
+app.listen(port);

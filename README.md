@@ -10,15 +10,25 @@ Orbit is a tool to store and share URI based on your current location
 	cd orbit
 	npm install
 
-Dependencies
+Involved projects
 
 - [mongoose](https://github.com/LearnBoost/mongoose)
 - [express](https://github.com/visionmedia/express)
 - [jade](http://jade-lang.com/)
-
-## Database ##
-
 - [MongoDB](http://www.mongodb.org/)
+
+Heroku
+
+Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku.com/download/osx)
+
+	$ heroku login
+	Enter your Heroku credentials.
+	Email: adam@example.com
+	Password:
+	heroku create --stack cedar
+	Creating stark-fog-398... done, stack is cedar
+	http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
+	Git remote heroku added
 
 ### Layout ###
 
@@ -86,8 +96,6 @@ Start mongoDB shell and store an exampe item
 	);
 	
 ### Mongoose ###
-
-	var i
 
 Search for *label only*
 
