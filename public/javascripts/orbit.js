@@ -73,7 +73,14 @@ function success(position) {
 				if (bookmark.url) {
 					$('#bookmarks').append(
 						$('<li>').append(
-							$('<a class="mapMarker">').attr('href',bookmark.url).attr('data-lat',bookmark.location.lat).attr('data-lon',bookmark.location.lon).append(bookmark.title)));
+							$('<a class="mapMarker">').
+								attr('href',bookmark.url).
+								attr('data-lat',bookmark.location.lat).
+								attr('data-lon',bookmark.location.lon).
+								append(bookmark.title)
+							).
+							append(' at ' + bookmark.location.lat + ',' + bookmark.location.lon)
+						);
 
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
