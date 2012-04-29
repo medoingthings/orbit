@@ -128,16 +128,25 @@ Seach for a *label and location*
 
 Anlegen eines Bookmarks
 
-	PUSH http://orbit2.herokuapp.com/?lat=x&lon=y&url=...&title=...
+	POST http://orbit2.herokuapp.com/?lat=x&lon=y&url=...&title=...
 	=> 200, 404
 
 Auslesen des iFrames
 	
-	GET http://orbit2.herokuapp.com/?boomarklet=true&lat=x&lon=y&radius=r
-	=> HTML, 200
+	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
+	Accept: text/html
+	=> html, 200
 
-Index
+Index anzeigen
+
+	GET http://orbit2.herokuapp.com/
+	Accept: text/html
+	=> html, 200
+
+Auslesen der angelegten Bookmarks
 
 	GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
 	Accept: application/json
-	=> json, 200	
+	=> json, 200
+	
+	
