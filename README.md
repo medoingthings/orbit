@@ -17,7 +17,7 @@ Involved projects
 - [jade](http://jade-lang.com/)
 - [MongoDB](http://www.mongodb.org/)
 
-Heroku
+**Heroku**
 
 Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku.com/download/osx)
 
