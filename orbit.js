@@ -92,9 +92,8 @@ app.get('/', function(req, res){
 	if (req.accepts("application/json")) {
 		
 		console.log(req);
-		
 		if (req.query["lon"] !== null && req.query["lat"] !== null) {
-			var label = req.route.path || '/';
+			var label = req.route.path || '';
 			var lon = parseFloat(req.query["lon"]) || 0;
 			var lat = parseFloat(req.query["lat"]) || 0;
 			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
@@ -119,7 +118,7 @@ app.get('/', function(req, res){
 		// GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
 		// Accept: text/html
 		// => HTML, 200
-		if (req.query["bookmarklet"] === true) {
+		if (req.query["bookmarklet"]) {
 			var item = new Item();
 			item.location.lon = parseFloat(req.query["lon"]);
 			item.location.lat = parseFloat(req.query["lat"]);
