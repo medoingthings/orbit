@@ -29,7 +29,7 @@ Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku
 	Creating stark-fog-398... done, stack is cedar
 	http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
 	Git remote heroku added
-	
+
 Create database
 
 	heroku addons:add mongolab:starter
@@ -49,7 +49,7 @@ Check the process
 The database layout is very simple. (For now) we only need one collection. Examplary `save()`
 
 	db.items.save(
-		{ 
+		{
 			url: "http://hackathon.advance-conference.com/",
 			title: "Advance Hackathon",
 			label: "/",
@@ -72,9 +72,9 @@ Speedup searching for a `label`
 
 MongoDB supports spatial Indexing
 
-**Caveats** 
+**Caveats**
 
-1. MongoDB 1.8+ supports spherical geometries. 
+1. MongoDB 1.8+ supports spherical geometries.
 2. MongoDB assumes that you are using decimal degrees in (longitude, latitude) order. This is the same order used for the [GeoJSON](http://geojson.org/geojson-spec.html#positions) spec.
 3. All distances use [radians](http://en.wikipedia.org/wiki/Radians).
 4.MongoDB doesn't handle wrapping at the poles or at the transition from -180° to +180° longitude but raises an error.
@@ -89,7 +89,7 @@ Creating the spatial index
 Searching for an item near a location
 
 	distances = db.runCommand({ geoNear : "points", near : [0, 0], spherical : true, maxDistance : range / earthRadius /* to radians */ }).results
-	
+
 ### Scaffolding ###
 
 Start mongodb daemon
@@ -100,7 +100,7 @@ Start mongoDB shell and store an exampe item
 
 	$ mongo
 	> db.items.save(
-		{ 
+		{
 			url: "http://hackathon.advance-conference.com/",
 			title: "Advance Hackathon",
 			label: "/",
@@ -108,32 +108,26 @@ Start mongoDB shell and store an exampe item
 			expires: "2012-04-29T16:15Z"
 		}
 	);
-	
+
 ### Mongoose ###
 
 Search for *label only*
 
 	ItemModel.find( {label: 'global'} , function(err, docs){ /* code */ });
-	
-Search for a *location*	
-	
+
+Search for a *location*
+
 	ItemModel.find({location : { $near : [23, 56], $maxDistance: 30 }} , function(err, docs){ /* code */ });
-	
-Seach for a *label and location*	
-	
+
+Seach for a *label and location*
+
 	ItemModel.find({label: 'global', location : { $near : [23, 56], $maxDistance: 30 }} , function(err, docs){ /* code */ });
-	
 
-## API ## 
+## API ##
 
-Create a new bookmark
+Get bookmarklet and store the location
 
-	POST http://orbit2.herokuapp.com/?lat=x&lon=y&url=...&title=...
-	=> 200, 404
-
-Read iFrame
-	
-	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
+	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&title=...&url=...
 	Accept: text/html
 	=> html, 200
 
@@ -143,10 +137,8 @@ Show index (user types orbit domain in address bar)
 	Accept: text/html
 	=> html, 200
 
-Get bookmarks
+Get bookmarks at given lat,lon in circle of radius r
 
 	GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
 	Accept: application/json
 	=> json, 200
-	
-	
