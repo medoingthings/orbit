@@ -1,13 +1,6 @@
-// ========================= //
-// GET URLs from this place //
-// ======================= //
-
-// ================ //
-// Show Google Map //
-// ============== //
-
 var lon;
 var lat;
+
 // Geolocation herausfinden, sofern möglich
 function success(position) {
 	lon = position.coords.longitude;
