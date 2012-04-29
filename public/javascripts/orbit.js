@@ -86,6 +86,7 @@ function success(position) {
 	$(".mapMarker").mouseover(function() {
 		var lat = this.attr("data-lat");
 		var lon = this.attr("data-lon");
+		console.log(lat + ", " + lon);
 		map.setCenter(new google.maps.LatLng(lat, lon ) );
 	});
 
