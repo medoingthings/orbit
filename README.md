@@ -48,7 +48,7 @@ Check the process
 
 The database layout is very simple. (For now) we only need one collection. Examplary `save()`
 
-	db.items.save(
+	db.bookmarks.save(
 		{
 			url: "http://hackathon.advance-conference.com/",
 			title: "Advance Hackathon",
@@ -88,7 +88,7 @@ Creating the spatial index
 	var earthRadius = 6378 // km
 	var range = 3000 // km
 
-Searching for an item near a location
+Searching for a bookmark near a location
 
 	distances = db.runCommand({ geoNear : "points", near : [0, 0], spherical : true, maxDistance : range / earthRadius /* to radians */ }).results
 
@@ -98,10 +98,10 @@ Start mongodb daemon
 
 	$ mongod run --config /usr/local/Cellar/mongodb/2.0.4-x86_64/mongod.conf
 
-Start mongoDB shell and store an exampe item
+Start mongoDB shell and store an exampe bookmark
 
 	$ mongo
-	> db.items.save(
+	> db.bookmarks.save(
 		{
 			url: "http://hackathon.advance-conference.com/",
 			title: "Advance Hackathon",

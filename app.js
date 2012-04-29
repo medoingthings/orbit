@@ -22,9 +22,9 @@ const HTTP_FAIL = 404;
 **************************************/
 
 var Schema = mongoose.Schema;
-var ItemSchema = new Schema();
+var BookmarkSchema = new Schema();
 
-ItemSchema.add({
+BookmarkSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, trim: true, default: '/' },
@@ -36,7 +36,7 @@ ItemSchema.add({
 		lat : Number
 	}
 });
-ItemSchema.index({
+BookmarkSchema.index({
 	location : "2d"
 });
 
@@ -46,8 +46,8 @@ mongoose.connect(mongoURL, function (err) {
 	console.log("connected to mongo");
 });
 
-//save to collection "items"
-var Item = mongoose.model('items', ItemSchema);
+//save to collection "bookmarks"
+var Bookmark = mongoose.model('bookmarks', BookmarkSchema);
 
 /*************************************/
 /* Express
@@ -83,7 +83,7 @@ app.get('/', function(req, res){
 			//MongoDB needs using decimal degrees in (longitude, latitude) order.
 			mongoose.connection.db.executeDbCommand(
 				{
-					geoNear	 : "items", 
+					geoNear	 : "bookmarks", 
 					near : [lon,lat], 
 					spherical : true,
 					maxDistance : maxDistance 
@@ -111,19 +111,19 @@ app.get('/', function(req, res){
 		// => HTML, 200
 		if (req.query["bookmarklet"]) {
 
-			var item = new Item();
-			item.location.lon = parseFloat(req.query["lon"]);
-			item.location.lat = parseFloat(req.query["lat"]);
-			item.url = req.query["url"];
-			item.title = req.query["title"] || '';
+			var bookmark = new Bookmark();
+			bookmark.location.lon = parseFloat(req.query["lon"]);
+			bookmark.location.lat = parseFloat(req.query["lat"]);
+			bookmark.url = req.query["url"];
+			bookmark.title = req.query["title"] || '';
 			
-			item.save(function(err){
+			bookmark.save(function(err){
 				if(!err){
-					console.log('Item saved');
+					console.log('Bookmark saved');
 
 					res.render('bookmarklet-success', {
 						title: 'Orbit',
-						item: item,
+						bookmark: bookmark,
 						layout: 'layout-bookmarklet'
 					});
 				}

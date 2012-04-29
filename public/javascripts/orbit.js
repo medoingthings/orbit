@@ -52,7 +52,7 @@ function success(position) {
 
 	// function that paints marker to the map
 	function paintMarker(lat, lon) {
-		// paint marker for this item
+		// paint marker for this bookmark
 		new google.maps.Marker({
 			position: new google.maps.LatLng(lat, lon),
 			map: map,
