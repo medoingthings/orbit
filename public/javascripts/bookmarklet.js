@@ -29,44 +29,59 @@
 	function orbitThisPage() {
 		(window.myBookmarklet = function() {
 
-			// Geolocation herausfinden, sofern möglich
+			// we have a location, let's do something with it
 			function success(position) {
-				var radius = 1; // km
+
+				// variables for drag events
+				var dx = 0;
+				var dragStart;
+				var dragRadius = $("#orbit-radius");
+				var radius = 1000; // meter
+				var dragLifetime = $("#orbit-lifetime");
 				var lifetime = 60; // minutes
 
+				// location variables
+				var lat = position.coords.latitude;
+				var lon = position.coords.longitude;
 
-				var mapCanvas = '<iframe src="http://localhost/maps.php?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude + '" style="width:500px; height:500px;" />';
-				//var infos     = '<div>Du bist hier: ' + position.coords.latitude + ', ' + position.coords.longitude + ', accuracy=' + position.coords.accuracy + ' dass ist deine URL: ' + window.location + '</div>';
-				var infos     = '<div id="orbit-bookmarklet"><div class="orbit-site"><iframe src="http://localhost/maps.php?latitude=' + position.coords.latitude + '&longitude=' + position.coords.longitude + '"></iframe><h2 class="title">' + document.title + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> km</span><br />for the next <span id="orbit-lifetime">' + lifetime + ' minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a></div>';
-				$("body").prepend(infos);
+				// send data to the server
+				//$.ajax({
+				//	type: "GET",
+				//	url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+				//	accepts: "application/json"
+				//	}).done(function( msg ) {
+				//	alert( "Data Saved: " + msg );
+				//});
 
+
+				// add location infos to the layer
+				var locationInfos = '<div class="orbit-site"><iframe src="http://localhost/maps.php?latitude=' + lat + '&longitude=' + lon + '"></iframe><h2 class="title">' + document.title + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
+				$("#orbit-bookmarklet").html(locationInfos);
+
+				// close on click
 				$("#orbit-close").click(function() {
 					$("#orbit-bookmarklet").remove();
 				});
 
 
-				var dx = 0;
-				var dragStart;
-				var dragRadius = $("#orbit-radius");
-				var dragging = false;
+				// drag to change values
 				var startMove = function() {
-					dragStart = event.pageX + dx;
+					dragStart = event.pageX;
 					event.preventDefault();
-					dragging = true;
+					$("body").bind("mousemove", whileMove);
 				};
 
 				var whileMove = function () {
-					if (dragging === true) {
-						dx = (event.pageX - dragStart) / 10;
-						dx = Math.round(dx*10)/10;
+						dx = ((event.pageX - dragStart) + radius);
+
 						if (dx >= 0) {
 							dragRadius.children("b").html(dx);
 						}
-					}
 				};
 
 				var endMove = function () {
-					dragging = false;
+					radius = dx;
+					$("body").unbind("mousemove");
 					// Parameter an den Server schicken
 				};
 
@@ -79,11 +94,9 @@
 						.bind("touchmove", whileMove)
 						.bind("touchend", endMove);
 				} else {
-					dragRadius
-						.bind("mousedown", startMove);
-					$("body")
-						.bind("mousemove", whileMove)
-						.bind("mouseup", endMove);
+					dragRadius.bind("mousedown", startMove);
+					dragLifetime.bind("mousedown", startMove);
+					$("body").bind("mouseup", endMove);
 				}
 
 			}
@@ -100,6 +113,10 @@
 				} else {
 				alert("Not Supported!");
 				}
+
+				var bookmarkletWrapper     = '<div id="orbit-bookmarklet"><h2>Receiving your location...</h2></div>';
+
+				$("body").prepend(bookmarkletWrapper);
 
 		})();
 	}

@@ -4,10 +4,104 @@
 	<meta charset="utf-8">
 	<title>orb.it</title>
     <link href="stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width">
 	<script src="javascripts/libs/modernizr-2.5.3.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript">
+			var lon;
+			var lat;
+			// Geolocation herausfinden, sofern möglich
+			function success(position) {
+				lon = position.coords.longitude;
+				lat = position.coords.latitude;
+				// =================================================
+				  var thisLocation = new google.maps.LatLng(lat, lon);
+				  // Todo, noch weiter nach recht verschieben
+				  var thisViewport = new google.maps.LatLng(lat, lon);
+				  var marker;
+				  var map;
+
+				  function initialize() {
+				    var mapOptions = {
+				      zoom: 13,
+				      mapTypeId: google.maps.MapTypeId.ROADMAP,
+				      center: thisViewport,
+		              disableDefaultUI: true
+				    };
+
+				    map = new google.maps.Map(document.getElementById("map_canvas"),
+				            mapOptions);
+				          
+				    marker = new google.maps.Marker({
+				      map:map,
+				      draggable:true,
+				      animation: google.maps.Animation.DROP,
+				      position: thisLocation
+				    });
+				    google.maps.event.addListener(marker, 'click', toggleBounce);
+
+		            // Kreis malen
+		            var cityCircle;
+		            var populationOptions = {
+		              strokeColor: "#20b4c5",
+		              strokeOpacity: 0.8,
+		              strokeWeight: 2,
+		              fillColor: "#20b4c5",
+		              fillOpacity: 0.35,
+		              map: map,
+		              center: thisLocation,
+		              radius: 1000
+		            };
+		            cityCircle = new google.maps.Circle(populationOptions);
+
+				  }
+				  initialize();
+
+				  function toggleBounce() {
+
+				    if (marker.getAnimation() != null) {
+				      marker.setAnimation(null);
+				    } else {
+				      marker.setAnimation(google.maps.Animation.BOUNCE);
+				    }
+				  }
+			}
+
+			// Was passiert, wenn fehlgeschlagen
+			function error() {
+				alert("error");
+			}
+
+			// Herausfinden ob Geolocation unterstützt wird
+			if (navigator.geolocation) {
+				// success() aufrufen wenn ja
+				navigator.geolocation.getCurrentPosition(success, error);
+				} else {
+				alert("Not Supported!");
+				}
+
+
+
+	  // ================================================
+	</script>
+	<style type="text/css">
+		.hero-unit {
+			position: relative;
+			background: transparent;
+		}
+		#map_canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%; 
+			height: 100%;
+			z-index: -1;
+			-webkit-border-radius: 5px;
+		}
+	</style>
 </head>
 <body>
 <!-- BOOKMARKLET
@@ -50,6 +144,7 @@
 			      I'm a bookmarklet, drag me to your bookmarks
 			    </a>
 			  </p>
+			  <div id="map_canvas"></div>
 			</div>
 		</header>
 		<section>
