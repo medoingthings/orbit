@@ -73,28 +73,21 @@ function success(position) {
 				if (bookmark.url) {
 					$('#bookmarks').append(
 						$('<li>').append(
-							$('<a class="mapMarker">').
-								attr('href',bookmark.url).
-								attr('data-lat',bookmark.location.lat).
-								attr('data-lon',bookmark.location.lon).
-								append(bookmark.title)
-							).
-							append(' at ' + bookmark.location.lat + ',' + bookmark.location.lon)
-						);
-
+							$('<a class="mapMarker">')
+								.attr('href',bookmark.url)
+								.attr('data-lat',bookmark.location.lat)
+								.attr('data-lon',bookmark.location.lon)
+								.append(bookmark.title)
+								.mouseover(function() {
+									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
+								}).
+								append(' at ' + bookmark.location.lat + ',' + bookmark.location.lon)
+						)
+					);
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
 				}
 			});
 		}
-	});
-
-
-
-	$(".mapMarker").mouseover(function() {
-		var lat = this.attr("data-lat");
-		var lon = this.attr("data-lon");
-		console.log(lat + ", " + lon);
-		map.setCenter(new google.maps.LatLng(lat, lon ) );
 	});
 
 	function toggleBounce() {
