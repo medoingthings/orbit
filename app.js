@@ -10,8 +10,8 @@ const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 
-// TODO unit
-const DEFAULT_DISTANCE = 3000;
+const EARTH_RADIUS = 6378000; 	// in m
+const DEFAULT_DISTANCE = 1000; 	// in m
 const DEFAULT_LIFETIME = HOUR;
 
 const HTTP_OK = 200;
@@ -28,6 +28,7 @@ ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, trim: true, default: '/' },
+	created		: { type: Date, default: Date.now() },
 	expires		: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
@@ -62,24 +63,6 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-});
-
-// POST http://orb.it/?lat=x&lon=y&url=...&title=... => 200, 404
-app.post('/', function(req, res){
-	var item = new Item();
-	item.location.lon = parseFloat(req.query["lon"]);
-	item.location.lat = parseFloat(req.query["lat"]);
-	item.url = req.query["url"];
-	item.title = req.query["title"] || '';
-
-	item.save(function(err){
-		if(!err){
-			console.log('Item saved');
-			res.send(HTTP_OK);
-		} else {
-			res.send(HTTP_FAIL);
-		}
-    });
 });
 
 // GET / 

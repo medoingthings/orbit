@@ -1,6 +1,8 @@
 # TODO #
 
 - Index ausliefern mit allen Bookmarks, dann mit Location basierter Suchergebnisse ersetzen
+- Geocoding von LatLng und Anzeige von Adressen
+- Automatisches Schließen des Bokmarklets in x Sekunden
 - Automatisches Säubern von Einträgen anhand des Expire Timestamps
 - Prüfung des Inhaltes (Injections verhindern)
 - Genauere Distanzangaben

@@ -1,37 +1,10 @@
-// ========================= //
-// GET URLs from this place //
-// ======================= //
-
-
-// ================ //
-// Show Google Map //
-// ============== //
-
 var lon;
 var lat;
+
 // Geolocation herausfinden, sofern möglich
 function success(position) {
 	lon = position.coords.longitude;
 	lat = position.coords.latitude;
-
-// pull data from server
-	$.ajax({
-		headers: {
-			Accept : "application/json; charset=utf-8",
-					"Content-Type": "application/json; charset=utf-8"
-		},
-		type: "GET",
-		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-		success: function(data){
-			
-			$.each (data, function (i, bookmark) {
-				$('#bookmarks').append(
-					$('<li>').append(
-				        $('<a>').attr('href',bookmark.url).append(bookmark.title)));
-			});
-		}
-	});
-
 
 	// =================================================
 	var thisLocation = new google.maps.LatLng(lat, lon);
@@ -57,6 +30,7 @@ function success(position) {
 			animation: google.maps.Animation.DROP,
 			position: thisLocation
 		});
+
 		google.maps.event.addListener(marker, 'click', toggleBounce);
 
 		// paint circle around currentLocation
@@ -75,8 +49,45 @@ function success(position) {
 
 	}
 	initialize();
-	$("h1").click(function() {
-		map.setCenter(new google.maps.LatLng( 50.9387401, 6.9865619 ) );
+
+	// function that paints marker to the map
+	function paintMarker(lat, lon) {
+		// paint marker for this item
+		new google.maps.Marker({
+			position: new google.maps.LatLng(lat, lon),
+			map: map,
+			title:"Hello World!"
+		});
+	}
+
+	// pull data from server
+	$.ajax({
+		headers: {
+			Accept : "application/json; charset=utf-8",
+					"Content-Type": "application/json; charset=utf-8"
+		},
+		type: "GET",
+		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+		success: function(data){
+			$.each (data, function (i, bookmark) {
+				if (bookmark.url) {
+					$('#bookmarks').append(
+						$('<li>').append(
+							$('<a class="mapMarker">')
+								.attr('href',bookmark.url)
+								.attr('data-lat',bookmark.location.lat)
+								.attr('data-lon',bookmark.location.lon)
+								.attr('title',bookmark.created)
+								.append(bookmark.title)
+								.mouseover(function() {
+									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
+								})
+						).append(' <abbr title="' + jQuery.timeago(bookmark.created) + '">' + jQuery.timeago(bookmark.created) + '</abbr>')
+					);
+					paintMarker(bookmark.location.lat, bookmark.location.lon);
+				}
+			});
+		}
 	});
 
 	function toggleBounce() {
