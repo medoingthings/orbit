@@ -80,17 +80,15 @@ function success(position) {
 								.append(bookmark.title)
 								.mouseover(function() {
 									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
-					})));
-
+								}).
+								append(' at ' + bookmark.location.lat + ',' + bookmark.location.lon)
+						)
+					);
 					paintMarker(bookmark.location.lat, bookmark.location.lon);
-
 				}
 			});
 		}
 	});
-
-
-
 
 	function toggleBounce() {
 		if (marker.getAnimation() !== null) {
