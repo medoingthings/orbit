@@ -54,6 +54,7 @@ The database layout is very simple. (For now) we only need one collection. Examp
 			title: "Advance Hackathon",
 			label: "/",
 			location : { lon : 6.98668, lat: 50.94926 },
+			created: "2012-04-29T14:15Z",
 			expires: "2012-04-29T16:15Z"
 		}
 	);
@@ -62,7 +63,8 @@ The database layout is very simple. (For now) we only need one collection. Examp
 - `title` title of the homepage
 - `label` for categorizing and searching/sorting
 - `location` where do we share the bookmark
-- `expires` [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) encoded timestamp when the entry is purged from database
+- `created` [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) encoded timestamp when bookmark was created
+- `expires` ISO 8601 encoded timestamp when the entry is purged from database
 
 ### Indices ###
 
@@ -105,6 +107,7 @@ Start mongoDB shell and store an exampe item
 			title: "Advance Hackathon",
 			label: "/",
 			location : { lon : 6.98668, lat: 50.94926 },
+			created: "2012-04-29T14:15Z",
 			expires: "2012-04-29T16:15Z"
 		}
 	);

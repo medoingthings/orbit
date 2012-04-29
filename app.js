@@ -28,6 +28,7 @@ ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, trim: true, default: '/' },
+	created		: { type: Date, default: Date.now() },
 	expires		: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
