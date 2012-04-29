@@ -73,23 +73,31 @@ app.get('/', function(req, res){
 	// Accept: application/json
 	// => json, 200
 	if (req.accepts("application/json")) {
-		
-		console.log(req);
+
 		if (req.query["lon"] !== null && req.query["lat"] !== null) {
 			var label = req.route.path || '/';
 			var lon = parseFloat(req.query["lon"]) || 0;
 			var lat = parseFloat(req.query["lat"]) || 0;
 			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
 
-			Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }}).sort('expires', -1).execFind(function(err, items){
-		        if (err) { 
-					console.log("ERR" + err);
-					throw err 
-				} else {		
-					// TODO strip object ids
-					res.json(items, 200);
+			//MongoDB needs using decimal degrees in (longitude, latitude) order.
+			mongoose.connection.db.executeDbCommand(
+				{
+					geoNear	 : "items", 
+					near : [lon,lat], 
+					spherical : true,
+					maxDistance : maxDistance 
+				}, function(err, result) { 
+					var rawResults = result.documents[0].results;
+					var results = [];
+					for (var i = 0; i < rawResults.length; i++) {
+						results[i] = rawResults[i].obj;
+						results[i].distance = rawResults[i].dis;
+					}
+					res.json(results, 200);
 				}
-		    });
+			);
+
 		} else {
 			res.json([], 404);
 		}
