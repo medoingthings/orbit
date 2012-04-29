@@ -25,11 +25,11 @@ function success(position) {
 		success: function(data){
 			
 			$.each (data, function (i, bookmark) {
-			   	$('#bookmarks').append(
-				    $('<li>').append(
-				        $('<a>').attr('href',bookmark.url).append(
-				            $('<span>').append(bookmark.title)
-				)));
+				if (bookmark.url) {
+					$('#bookmarks').append(
+						$('<li>').append(
+					        $('<a>').attr('href',bookmark.url).append(bookmark.title)));
+				}
 			});
 		}
 	});
