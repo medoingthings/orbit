@@ -24,12 +24,13 @@ Dependencies
 
 The database layout is very simple. (For now) we only need one collection. Examplary `save()`
 
-	db.orbit.save(
+	db.items.save(
 		{ 
-			url: "abc.de",
+			url: "http://hackathon.advance-conference.com/",
+			title: "Advance Hackathon"
 			label: "/",
-			location : { lon : 40.739037, lat: 73.992964 },
-			expires: "2012-04-27T23:59Z"
+			location : { lon : 6.98668, lat: 50.94926 },
+			expires: "2012-04-29T16:15Z"
 		}
 	);
 
@@ -74,14 +75,13 @@ Start mongodb daemon
 Start mongoDB shell and store an exampe item
 
 	$ mongo
-
 	> db.items.save(
 		{ 
-			url: "http://acme.inc",
-			title: "Acme - We make everything!"
+			url: "http://hackathon.advance-conference.com/",
+			title: "Advance Hackathon"
 			label: "/",
-			location : { lon : 23, lat: 56 },
-			expires: "2012-04-27T23:59Z"
+			location : { lon : 6.98668, lat: 50.94926 },
+			expires: "2012-04-29T16:15Z"
 		}
 	);
 	
