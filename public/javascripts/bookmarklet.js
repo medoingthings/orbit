@@ -53,7 +53,7 @@
 					type: "POST",
 					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon + "&title=" + documentTitle + "&url=" + documentUrl,
 					success: function(data, textStatus){
-						alert(data + ", " + textStatus);
+
 					}
 				});
 
