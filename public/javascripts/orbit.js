@@ -25,11 +25,9 @@ function success(position) {
 		success: function(data){
 			
 			$.each (data, function (i, bookmark) {
-				if (bookmark.url) {
-					$('#bookmarks').append(
-						$('<li>').append(
-					        $('<a>').attr('href',bookmark.url).append(bookmark.title)));
-				}
+				$('#bookmarks').append(
+					$('<li>').append(
+				        $('<a>').attr('href',bookmark.url).append(bookmark.title)));
 			});
 		}
 	});
