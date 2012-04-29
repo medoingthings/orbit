@@ -126,9 +126,9 @@ Seach for a *label and location*
 
 ## API ## 
 
-Read iFrame
+Get bookmarklet and store the location
 	
-	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
+	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&title=...&url=...
 	Accept: text/html
 	=> html, 200
 
@@ -138,7 +138,7 @@ Show index (user types orbit domain in address bar)
 	Accept: text/html
 	=> html, 200
 
-Get bookmarks
+Get bookmarks at given lat,lon in circle of radius r
 
 	GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
 	Accept: application/json
