@@ -3,8 +3,19 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/bookmarklet.css')
+    script(src='javascripts/lib/jquery-1.7.2.js')
     script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
     script
+
+      // send data to the server
+      $.ajax({
+        type: "POST",
+        url: "http://orbit2.herokuapp.com/?lat=#{item.location.lat}&lon=#{item.location.lon}&title=title-goes-here&url=url-goes-here,
+        success: function(data, textStatus){
+        }
+      });
+
+      // paint Map
       var thisLocation = new google.maps.LatLng(#{item.location.lat},#{item.location.lon});
       var marker;
       var map;

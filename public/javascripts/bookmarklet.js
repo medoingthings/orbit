@@ -45,21 +45,10 @@
 				var lon = position.coords.longitude;
 				//document variable
 				var documentTitle = document.title;
-				var documentUrl = document.location;
-
-
-				// send data to the server
-				$.ajax({
-					type: "POST",
-					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon + "&title=" + documentTitle + "&url=" + documentUrl,
-					success: function(data, textStatus){
-
-					}
-				});
-
-
+				var documentUrl   = document.location;
+				// send data through the iframe to the server
 				// add location infos to the layer
-				var locationInfos = '<div class="orbit-site"><iframe src="http://orbit2.herokuapp.com/?bookmarklet=true&lat=' + lat + '&lon=' + lon + '"></iframe><h2 class="title">' + documentTitle + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
+				var locationInfos = '<div class="orbit-site"><iframe src="http://orbit2.herokuapp.com/?bookmarklet=true&lat=' + lat + '&lon=' + lon + '&title=' + documentTitle + '&url=' + documentUrl + '"></iframe><h2 class="title">' + documentTitle + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
 				$("#orbit-bookmarklet").html(locationInfos);
 
 				// close on click
@@ -91,17 +80,18 @@
 
 
 
+				// hierfür bräuchte man noch modernizr
 				// Bind the drag / touch events
-				if (Modernizr.touch) {
-					dragRadius
-						.bind("touchstart", startMove)
-						.bind("touchmove", whileMove)
-						.bind("touchend", endMove);
-				} else {
-					dragRadius.bind("mousedown", startMove);
-					dragLifetime.bind("mousedown", startMove);
-					$("body").bind("mouseup", endMove);
-				}
+				//if (Modernizr.touch) {
+				//	dragRadius
+				//		.bind("touchstart", startMove)
+				//		.bind("touchmove", whileMove)
+				//		.bind("touchend", endMove);
+				//} else {
+				//	dragRadius.bind("mousedown", startMove);
+				//	dragLifetime.bind("mousedown", startMove);
+				//	$("body").bind("mouseup", endMove);
+				//}
 
 			}
 
