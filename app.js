@@ -27,7 +27,7 @@ var ItemSchema = new Schema();
 ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
-	label		: { type: String, index: true, trim: true },
+	label		: { type: String, index: true, trim: true, default: '/' },
 	timestamp	: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
@@ -93,7 +93,7 @@ app.get('/', function(req, res){
 		
 		console.log(req);
 		if (req.query["lon"] !== null && req.query["lat"] !== null) {
-			var label = req.route.path || '';
+			var label = req.route.path || '/';
 			var lon = parseFloat(req.query["lon"]) || 0;
 			var lat = parseFloat(req.query["lat"]) || 0;
 			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
