@@ -24,11 +24,11 @@ function success(position) {
 		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
 		success: function(data){
 			
-			$.each (data, function (bookmark) {
+			$.each (data, function (i, bookmark) {
 			   	$('#bookmarks').append(
 				    $('<li>').append(
 				        $('<a>').attr('href',bookmark.url).append(
-				            $('<span>').append("bookmark.title")
+				            $('<span>').append(bookmark.title)
 				)));
 			});
 		}
