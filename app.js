@@ -28,7 +28,7 @@ ItemSchema.add({
 	url			: { type: String, trim: true },
 	title		: { type: String, trim: true },
 	label		: { type: String, index: true, trim: true, default: '/' },
-	timestamp	: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
+	expires		: { type: Date, default: new Date(new Date().getTime() + 60 * 60 * 1000) },
 	/* ! mongoDB demands that location is always {lon, lat} never {lat, lon}*/
 	location: {
 		lon : Number,
@@ -98,7 +98,7 @@ app.get('/', function(req, res){
 			var lat = parseFloat(req.query["lat"]) || 0;
 			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
 
-			Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }} , function(err, items){
+			Item.find({label: label, location : { $near : [lon, lat], $maxDistance: maxDistance }}).sort('expires', -1).execFind(function(err, items){
 		        if (err) { 
 					console.log("ERR" + err);
 					throw err 
