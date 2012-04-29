@@ -22,7 +22,7 @@ function success(position) {
 	$.ajax({
 		type: "GET",
 		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-		dataType: "application/json",
+		dataType: "json",
 		success: function(data){
 			alert(data);
 		}
