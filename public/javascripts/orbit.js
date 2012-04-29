@@ -2,14 +2,6 @@
 // GET URLs from this place //
 // ======================= //
 
-$.ajax({
-	type: "GET",
-	url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-	accepts: "application/json",
-	success: function(data){
-		alert(data);
-	}
-});
 
 // ================ //
 // Show Google Map //
@@ -21,6 +13,18 @@ var lat;
 function success(position) {
 	lon = position.coords.longitude;
 	lat = position.coords.latitude;
+
+// pull data from server
+	$.ajax({
+		type: "GET",
+		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+		accepts: "application/json",
+		success: function(data){
+			alert(data);
+		}
+	});
+
+
 	// =================================================
 	var thisLocation = new google.maps.LatLng(lat, lon);
 	// Todo, noch weiter nach recht verschieben
@@ -63,7 +67,6 @@ function success(position) {
 
 	}
 	initialize();
-console.log(lat + ", " + lon);
 	$("h1").click(function() {
 		map.setCenter(new google.maps.LatLng( 50.9387401, 6.9865619 ) );
 	});
