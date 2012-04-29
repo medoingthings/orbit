@@ -46,7 +46,7 @@
 
 				// send data to the server
 				$.ajax({
-					type: "GET",
+					type: "POST",
 					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
 					accepts: "application/json",
 					success: function(data){
