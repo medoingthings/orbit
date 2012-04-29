@@ -57,39 +57,9 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-// POST
-app.post('/', function(req, res){ 
-	
-	console.log("POST");
-	
-	var item = new Item();
-	item.location.lon = parseFloat(req.query["lon"]);
-	item.location.lat = parseFloat(req.query["lat"]);
-	item.url = req.query["url"];
-	item.title = req.query["title"] || '';
-	
-	item.save(function(err){
-		if(!err){
-			console.log('Item saved');
-			
-			res.render('bookmarklet-success', {
-				title: 'Orbit',
-				item: item,
-				layout: 'layout-bookmarklet'
-			});
-		} else {
-			res.render('bookmarklet-fail', {
-				title: 'Orbit',
-				layout: 'layout-bookmarklet'
-			});
-		}
-    });
-});
-
-
-// GET
 app.get('/', function(req, res){
 	
+	// GET / => JSON
 	if (req.accepts("application/json")) {
 		
 		console.log(req);
@@ -115,10 +85,36 @@ app.get('/', function(req, res){
 	}
 	
 	else if (req.accepts("text/html")) {
-		res.render('index', {
-			title: 'Orbit',
-			layout: 'layout-default'
-		});
+		
+		if (req.query["bookmarklet"] === true) {
+			var item = new Item();
+			item.location.lon = parseFloat(req.query["lon"]);
+			item.location.lat = parseFloat(req.query["lat"]);
+			item.url = req.query["url"];
+			item.title = req.query["title"] || '';
+
+			item.save(function(err){
+				if(!err){
+					console.log('Item saved');
+
+					res.render('bookmarklet-success', {
+						title: 'Orbit',
+						item: item,
+						layout: 'layout-bookmarklet'
+					});
+				} else {
+					res.render('bookmarklet-fail', {
+						title: 'Orbit',
+						layout: 'layout-bookmarklet'
+					});
+				}
+		    });
+		} else {
+			res.render('index', {
+				title: 'Orbit',
+				layout: 'layout-default'
+			});
+		}
 	}
 	
 });
