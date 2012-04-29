@@ -48,9 +48,10 @@
 				$.ajax({
 					type: "GET",
 					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-					accepts: "application/json"
-					}).done(function( msg ) {
-					alert( "Data Saved: " + msg );
+					accepts: "application/json",
+					success: function(data){
+						alert(data);
+					}
 				});
 
 
