@@ -6,28 +6,55 @@ Orbit is a tool to store and share URI based on your current location
 
 	brew install mongodb
 	git clone git://github.com/zix2c/orbit.git
+	npm install vows -g
+	cd orbit
 	npm install
 
-Dependencies
+Involved projects
 
 - [mongoose](https://github.com/LearnBoost/mongoose)
 - [express](https://github.com/visionmedia/express)
 - [jade](http://jade-lang.com/)
-
-## Database ##
-
 - [MongoDB](http://www.mongodb.org/)
+
+Heroku
+
+Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku.com/download/osx)
+
+	$ heroku login
+	Enter your Heroku credentials.
+	Email: adam@example.com
+	Password:
+	heroku create --stack cedar
+	Creating stark-fog-398... done, stack is cedar
+	http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
+	Git remote heroku added
+	
+Create database
+
+	heroku addons:add mongolab:starter
+
+Deploy and run
+
+	git push heroku master
+	heroku ps:scale web=1
+
+Check the process
+
+	heroku ps
+	heroku logs
 
 ### Layout ###
 
 The database layout is very simple. (For now) we only need one collection. Examplary `save()`
 
-	db.orbit.save(
+	db.items.save(
 		{ 
-			url: "abc.de",
+			url: "http://hackathon.advance-conference.com/",
+			title: "Advance Hackathon",
 			label: "/",
-			location : { lon : 40.739037, lat: 73.992964 },
-			expires: "2012-04-27T23:59Z"
+			location : { lon : 6.98668, lat: 50.94926 },
+			expires: "2012-04-29T16:15Z"
 		}
 	);
 
@@ -72,18 +99,17 @@ Start mongodb daemon
 Start mongoDB shell and store an exampe item
 
 	$ mongo
-
 	> db.items.save(
 		{ 
-			url: "http://acme.inc",
-			title: "Acme - We make everything!"
+			url: "http://hackathon.advance-conference.com/",
+			title: "Advance Hackathon",
 			label: "/",
-			location : { lon : 23, lat: 56 },
-			expires: "2012-04-27T23:59Z"
+			location : { lon : 6.98668, lat: 50.94926 },
+			expires: "2012-04-29T16:15Z"
 		}
 	);
 	
-### Queries ###
+### Mongoose ###
 
 Search for *label only*
 
