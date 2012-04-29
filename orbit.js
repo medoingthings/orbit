@@ -64,6 +64,7 @@ app.post('/', function(req, res){
 			
 			res.render('bookmarklet-success', {
 				title: 'Orbit',
+				item: item,
 				layout: 'layout-bookmarklet'
 			});
 		} else {

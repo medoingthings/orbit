@@ -3,4 +3,41 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+    script(src='https://maps.googleapis.com/maps/api/js?sensor=false')
+    script
+      var thisLocation = new google.maps.LatLng(#{item.location.lat},#{item.location.lon});
+      var marker;
+      var map;
+      function initialize() {
+        var mapOptions = {
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: thisLocation,
+        disableDefaultUI: true
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        marker = new google.maps.Marker({
+          map:map,
+          draggable:true,
+          animation: google.maps.Animation.DROP,
+          position: thisLocation
+        });
+        google.maps.event.addListener(marker, 'click', toggleBounce);
+        // Kreis malen
+        var cityCircle;
+        var populationOptions = {
+          strokeColor: "#20b4c5",
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: "#20b4c5",
+          fillOpacity: 0.35,
+          map: map,
+          center: thisLocation,
+          radius: 1000
+        };
+        cityCircle = new google.maps.Circle(populationOptions);
+      }
+      function toggleBounce() {
+        if (marker.getAnimation() !== null) {        marker.setAnimation(null);} else {marker.setAnimation(google.maps.Animation.BOUNCE);}
+      }
+  body(onload='initialize()')!= body
