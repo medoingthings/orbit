@@ -14,7 +14,7 @@ const HOUR = 60 * MINUTE;
 const DEFAULT_DISTANCE = 30;
 const DEFAULT_LIFETIME = HOUR;
 
-const HHTTP_OK = 200;
+const HTTP_OK = 200;
 const HTTP_FAIL = 404;
 
 /**************************************
@@ -119,12 +119,13 @@ app.get('/', function(req, res){
 		// Accept: text/html
 		// => HTML, 200
 		if (req.query["bookmarklet"]) {
+
 			var item = new Item();
 			item.location.lon = parseFloat(req.query["lon"]);
 			item.location.lat = parseFloat(req.query["lat"]);
 			item.url = req.query["url"];
 			item.title = req.query["title"] || '';
-
+			
 			item.save(function(err){
 				if(!err){
 					console.log('Item saved');
