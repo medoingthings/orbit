@@ -77,7 +77,7 @@ function success(position) {
 								.attr('href',bookmark.url)
 								.attr('data-lat',bookmark.location.lat)
 								.attr('data-lon',bookmark.location.lon)
-								.append(bookmark.title)
+								.append('<abbr title="' + bookmark.created + '">' + bookmark.created + '</abbr> ')
 								.mouseover(function() {
 									map.setCenter(new google.maps.LatLng(bookmark.location.lat, bookmark.location.lon ) );
 								})
