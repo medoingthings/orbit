@@ -23,7 +23,14 @@ function success(position) {
 		type: "GET",
 		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
 		success: function(data){
-			alert(data);
+			
+			$.each (data, function (bookmark) {
+			   	$('#bookmarjs').append(
+				    $('<li>').append(
+				        $('<a>').attr('href',bookmark.url).append(
+				            $('<span>').append("bookmark.title")
+				)));
+			});
 		}
 	});
 
