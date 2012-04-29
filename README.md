@@ -51,7 +51,7 @@ The database layout is very simple. (For now) we only need one collection. Examp
 	db.items.save(
 		{ 
 			url: "http://hackathon.advance-conference.com/",
-			title: "Advance Hackathon"
+			title: "Advance Hackathon",
 			label: "/",
 			location : { lon : 6.98668, lat: 50.94926 },
 			expires: "2012-04-29T16:15Z"
@@ -102,7 +102,7 @@ Start mongoDB shell and store an exampe item
 	> db.items.save(
 		{ 
 			url: "http://hackathon.advance-conference.com/",
-			title: "Advance Hackathon"
+			title: "Advance Hackathon",
 			label: "/",
 			location : { lon : 6.98668, lat: 50.94926 },
 			expires: "2012-04-29T16:15Z"
