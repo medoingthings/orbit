@@ -15,14 +15,13 @@ function success(position) {
 	lat = position.coords.latitude;
 
 // pull data from server
-	$.ajaxSetup({
-		accepts: "application/json"
-	});
-
 	$.ajax({
+		headers: {
+			Accept : "application/json; charset=utf-8",
+					"Content-Type": "application/json; charset=utf-8"
+		},
 		type: "GET",
 		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-		dataType: "json",
 		success: function(data){
 			alert(data);
 		}
