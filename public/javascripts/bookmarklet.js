@@ -45,13 +45,13 @@
 				var lon = position.coords.longitude;
 
 				// send data to the server
-				//$.ajax({
-				//	type: "GET",
-				//	url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-				//	accepts: "application/json"
-				//	}).done(function( msg ) {
-				//	alert( "Data Saved: " + msg );
-				//});
+				$.ajax({
+					type: "GET",
+					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+					accepts: "application/json"
+					}).done(function( msg ) {
+					alert( "Data Saved: " + msg );
+				});
 
 
 				// add location infos to the layer
