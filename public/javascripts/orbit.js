@@ -13,28 +13,6 @@ function success(position) {
 	lon = position.coords.longitude;
 	lat = position.coords.latitude;
 
-<<<<<<< Updated upstream
-// pull data from server
-	$.ajax({
-		headers: {
-			Accept : "application/json; charset=utf-8",
-					"Content-Type": "application/json; charset=utf-8"
-		},
-		type: "GET",
-		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-		success: function(data){
-			
-			$.each (data, function (i, bookmark) {
-				$('#bookmarks').append(
-					$('<li>').append(
-				        $('<a>').attr('href',bookmark.url).append(bookmark.title)));
-			});
-		}
-	});
-
-=======
->>>>>>> Stashed changes
-
 	// =================================================
 	var thisLocation = new google.maps.LatLng(lat, lon);
 	// Todo, noch weiter nach recht verschieben
@@ -88,8 +66,6 @@ function success(position) {
 			title:"Hello World!"
 		});
 	}
-
-
 
 	// pull data from server
 	$.ajax({
