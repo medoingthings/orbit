@@ -122,3 +122,22 @@ Search for a *location*
 Seach for a *label and location*	
 	
 	ItemModel.find({label: 'global', location : { $near : [23, 56], $maxDistance: 30 }} , function(err, docs){ /* code */ });
+	
+
+## API ## 
+
+Anlegen eines Bookmarks
+
+	PUSH http://orbit2.herokuapp.com/?lat=x&lon=y&url=...&title=...
+	=> 200, 404
+
+Auslesen des iFrames
+	
+	GET http://orbit2.herokuapp.com/?boomarklet=true&lat=x&lon=y&radius=r
+	=> HTML, 200
+
+Index
+
+	GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
+	Accept: application/json
+	=> json, 200	
