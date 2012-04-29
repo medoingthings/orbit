@@ -25,7 +25,7 @@ function success(position) {
 		success: function(data){
 			
 			$.each (data, function (bookmark) {
-			   	$('#bookmarjs').append(
+			   	$('#bookmarks').append(
 				    $('<li>').append(
 				        $('<a>').attr('href',bookmark.url).append(
 				            $('<span>').append("bookmark.title")
