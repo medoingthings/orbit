@@ -64,24 +64,6 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
-// POST http://orb.it/?lat=x&lon=y&url=...&title=... => 200, 404
-app.post('/', function(req, res){
-	var item = new Item();
-	item.location.lon = parseFloat(req.query["lon"]);
-	item.location.lat = parseFloat(req.query["lat"]);
-	item.url = req.query["url"];
-	item.title = req.query["title"] || '';
-
-	item.save(function(err){
-		if(!err){
-			console.log('Item saved');
-			res.send(HTTP_OK);
-		} else {
-			res.send(HTTP_FAIL);
-		}
-    });
-});
-
 // GET / 
 app.get('/', function(req, res){
 	

@@ -126,11 +126,6 @@ Seach for a *label and location*
 
 ## API ## 
 
-Create a new bookmark
-
-	POST http://orbit2.herokuapp.com/?lat=x&lon=y&url=...&title=...
-	=> 200, 404
-
 Read iFrame
 	
 	GET http://orbit2.herokuapp.com/?bookmarklet=true&lat=x&lon=y&radius=r
@@ -148,5 +143,3 @@ Get bookmarks
 	GET http://orbit2.herokuapp.com/?lat=x&lon=y&radius=r
 	Accept: application/json
 	=> json, 200
-	
-	
