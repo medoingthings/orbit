@@ -5,7 +5,7 @@
 - Automatisches Schließen des Bokmarklets in x Sekunden
 - Automatisches Säubern von Einträgen anhand des Expire Timestamps
 - Prüfung des Inhaltes (Injections verhindern)
-- Genauere Distanzangaben
+- Echzeitintegration
 - Auslesen und Mitangabe von Metadaten der Seiten
 - Löschen von Einträgen (Premium)
 - Angabe von Haltbarkeit (Premium)
