@@ -43,20 +43,23 @@
 				// location variables
 				var lat = position.coords.latitude;
 				var lon = position.coords.longitude;
+				//document variable
+				var documentTitle = document.title;
+				var documentUrl = document.location;
+
 
 				// send data to the server
 				$.ajax({
 					type: "POST",
-					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
-					accepts: "application/json",
-					success: function(data){
-						alert(data);
+					url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon + "&title=" + documentTitle + "&url=" + documentUrl,
+					success: function(data, textStatus){
+						alert(data + ", " + textStatus);
 					}
 				});
 
 
 				// add location infos to the layer
-				var locationInfos = '<div class="orbit-site"><iframe src="http://orbit2.herokuapp.com/?bookmarklet=true&lat=' + lat + '&lon=' + lon + '"></iframe><h2 class="title">' + document.title + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
+				var locationInfos = '<div class="orbit-site"><iframe src="http://orbit2.herokuapp.com/?bookmarklet=true&lat=' + lat + '&lon=' + lon + '"></iframe><h2 class="title">' + documentTitle + '</h2><p class="label">Whoopie <a href="#edit" class="edit">edit</a></p></div><div class="orbit-message"><h3>This website orbits around your location, now.</h3><p>It can be seen from people within a radius of  <span id="orbit-radius"><b>' + radius + '</b> m</span><br />for the next <span id="orbit-lifetime"><b>' + lifetime + '</b> minutes</span>.</p></div><a id="orbit-close"><span>Close</span></a>';
 				$("#orbit-bookmarklet").html(locationInfos);
 
 				// close on click
