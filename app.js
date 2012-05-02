@@ -96,7 +96,7 @@ app.get('/', function(req, res){
 					var results = [];
 					for (var i = 0; i < rawResults.length; i++) {
 						results[i] = rawResults[i].obj;
-						results[i].distance = rawResults[i].dis;
+						results[i].distance = rawResults[i].dis * EARTH_RADIUS;
 					}
 					res.json(results, 200);
 				}

@@ -67,7 +67,7 @@ function success(position) {
 					"Content-Type": "application/json; charset=utf-8"
 		},
 		type: "GET",
-		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon,
+		url: "http://orbit2.herokuapp.com/?lat=" + lat + "&lon=" + lon+ "&radius=" + 2000,
 		success: function(data){
 			$.each (data, function (i, bookmark) {
 				if (bookmark.url) {
