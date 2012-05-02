@@ -51,12 +51,12 @@ function success(position) {
 	initialize();
 
 	// function that paints marker to the map
-	function paintMarker(lat, lon) {
+	function paintMarker(lat, lon, title) {
 		// paint marker for this bookmark
 		new google.maps.Marker({
 			position: new google.maps.LatLng(lat, lon),
 			map: map,
-			title:"Hello World!"
+			title: title
 		});
 	}
 
@@ -84,7 +84,7 @@ function success(position) {
 								})
 						)
 					);
-					paintMarker(bookmark.location.lat, bookmark.location.lon);
+					paintMarker(bookmark.location.lat, bookmark.location.lon, bookmark.title);
 				}
 			});
 		}
