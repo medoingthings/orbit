@@ -80,13 +80,13 @@ app.get('/', function(req, res){
 			var lat = parseFloat(req.query["lat"]) || 0;
 			var maxDistance = parseFloat(req.query["radius"]) || DEFAULT_DISTANCE;
 
-			//MongoDB needs using decimal degrees in (longitude, latitude) order.
+			//MongoDB needs to use decimal degrees in order of (longitude, latitude)
 			mongoose.connection.db.executeDbCommand(
 				{
 					geoNear	 : "bookmarks", 
 					near : [lon,lat], 
 					spherical : true,
-					maxDistance : maxDistance 
+					maxDistance : EARTH_RADIUS / maxDistance /* to radians */
 				}, function(err, result) { 
 					var rawResults = result.documents[0].results;
 					var results = [];
