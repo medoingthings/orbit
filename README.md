@@ -19,7 +19,13 @@ Involved projects
 
 **Heroku**
 
-Download and install toolbelt from [toolbelt.heroku.com](https://toolbelt.heroku.com/download/osx)
+Install the toolbelt utilities
+
+	brew install git
+	sudo gem install foreman
+	sudo gem install heroku
+
+Create the instance
 
 	$ heroku login
 	Enter your Heroku credentials.
