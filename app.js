@@ -92,7 +92,7 @@ app.get('/', function(req, res){
 					near : [lon,lat], 
 					spherical : true,
 					distanceMultiplier: EARTH_RADIUS,
-					maxDistance :  maxDistance
+					maxDistance :  radiansDistance
 				}, function(err, result) { 
 					var rawResults = result.documents[0].results;
 					var results = [];
