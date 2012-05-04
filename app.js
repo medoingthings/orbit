@@ -98,15 +98,15 @@ app.get('/', function(req, res){
 					var results = [];
 					for (var i = 0; i < rawResults.length; i++) {
 						results[i] = rawResults[i].obj;
-						results[i].distance = rawResults[i].dis.toPrecision(2);
+						results[i].distance = rawResults[i].dis.toFixed(0);
 						results[i].unit = DEFAULT_UNIT;
 					}
-					res.json(results, 200);
+					res.json(results, HTTP_OK);
 				}
 			);
 
 		} else {
-			res.json([], 404);
+			res.json([], HTTP_FAIL);
 		}
 	}
 	
