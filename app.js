@@ -12,6 +12,7 @@ const HOUR = 60 * MINUTE;
 
 const EARTH_RADIUS = 6378000; 	// in m
 const DEFAULT_DISTANCE = 1000; 	// in m
+const DEFAULT_UNIT = "m"
 const DEFAULT_LIFETIME = HOUR;
 
 const HTTP_OK = 200;
@@ -90,13 +91,15 @@ app.get('/', function(req, res){
 					geoNear	 : "bookmarks", 
 					near : [lon,lat], 
 					spherical : true,
-					maxDistance : radiansDistance
+					distanceMultiplier: EARTH_RADIUS,
+					maxDistance :  maxDistance
 				}, function(err, result) { 
 					var rawResults = result.documents[0].results;
 					var results = [];
 					for (var i = 0; i < rawResults.length; i++) {
 						results[i] = rawResults[i].obj;
-						results[i].distance = rawResults[i].dis * EARTH_RADIUS;
+						results[i].distance = rawResults[i].dis.toPrecision(2);
+						results[i].unit = DEFAULT_UNIT;
 					}
 					res.json(results, 200);
 				}
