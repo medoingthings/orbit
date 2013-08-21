@@ -1,0 +1,180 @@
+/* =============================================================================
+   Bookmarklet-Styles
+   ========================================================================== */
+
+@-webkit-keyframes slideIn {
+  from {opacity: 0; -webkit-transform: translateY(-100%);}
+  to   {opacity: 1; -webkit-transform: translateY(0);}
+}
+
+@-moz-keyframes slideIn {
+  from {opacity: 0; -moz-transform: translateY(-100%);}
+  to   {opacity: 1; -moz-transform: translateY(0);}
+}
+
+@-o-keyframes slideIn {
+  from {opacity: 0; -o-transform: translateY(-100%);}
+  to   {opacity: 1; -o-transform: translateY(0);}
+}
+
+@-ms-keyframes slideIn {
+  from {opacity: 0; -ms-transform: translateY(-100%);}
+  to   {opacity: 1; -ms-transform: translateY(0);}
+}
+
+@keyframes slideIn {
+  from {opacity: 0; transform: translateY(-100%);}
+  to   {opacity: 1; transform: translateY(0);}
+}
+
+#orbit-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: red;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  background: url('../images/btn-close.png') no-repeat transparent;
+  opacity: 0.5;
+  display: block;
+}
+
+#orbit-close span {
+  display: none;
+}
+
+#orbit-close:hover {
+  opacity: 1;
+}
+
+#orbit-bookmarklet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url('http://localhost/images/bg-pattern.jpg') repeat #20b4c5;
+  z-index: 999999999999;
+  width: 100%;
+  margin: 0;
+  padding: 30px;
+  box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+  -webkit-animation: 0.5s slideIn ease-out;
+  -moz-animation: 0.5s slideIn ease-out;
+  -o-animation: 0.5s slideIn ease-out;
+  -ms-animation: 0.5s slideIn ease-out;
+  animation: 0.5s slideIn ease-out;
+  box-sizing: border-box;
+}
+
+#orbit-bookmarklet a:link,
+#orbit-bookmarklet a:visited,
+#orbit-bookmarklet a:hover,
+#orbit-bookmarklet a:active {
+  color: #20b4c5;
+  text-decoration: none;
+}
+
+#orbit-bookmarklet a:hover {
+  color: #178a97;
+  text-decoration: underline;
+}
+
+#orbit-bookmarklet h2, 
+#orbit-bookmarklet h3, 
+#orbit-bookmarklet p,
+#orbit-bookmarklet .orbit-message h3 {
+  color: #fff;
+  font: 200 20px/28px "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+}
+
+#orbit-bookmarklet .orbit-site {
+  float: left;
+  width: 370px;
+}
+
+#orbit-bookmarklet .orbit-site .label {
+  background: #fff;
+  font-size: 14px;
+  color: #000;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  display: inline;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#orbit-bookmarklet .orbit-site:after {
+  content: '.';
+  visibility: hidden;
+  clear: both;
+  display: block;
+  height: 0;
+}
+
+#orbit-bookmarklet .orbit-site iframe {
+  width: 120px;
+  height: 120px;
+  border: none;
+  float: left;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+#orbit-bookmarklet .orbit-site h2,
+#orbit-bookmarklet .orbit-site .label {
+  margin: 10px 0 0 140px;
+}
+
+#orbit-bookmarklet .orbit-site .label {
+  margin: 10px 0 0 20px;
+}
+
+#orbit-bookmarklet .orbit-site .edit {
+  display: none;
+}
+
+#orbit-bookmarklet .orbit-site .label:hover .edit {
+  display: inline;
+}
+
+#orbit-bookmarklet .orbit-message {
+  margin: 0 0 0 390px;
+}
+
+#orbit-bookmarklet .orbit-message h3 {
+  font-size: 30px;
+  margin: 0 0 10px 0;
+}
+
+#orbit-bookmarklet .orbit-message p span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 8px;
+  line-height: 32px;
+  cursor: e-resize;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+@media (max-width: 825px) {
+
+  #orbit-bookmarklet .orbit-site {
+    float: none;
+  }
+
+  #orbit-bookmarklet .orbit-message {
+    margin: 30px 0 0 0;
+  }
+
+}
+
+
+
+

@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>orb.it</title>
+    <link href="stylesheets/bootstrap.css" rel="stylesheet">
+    <link href="stylesheets/bootstrap-responsive.css" rel="stylesheet">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="viewport" content="width=device-width">
+	<script src="javascripts/libs/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="javascripts/libs/jquery.timeago.js"></script>
+	<script src="javascripts/orbit.js"></script>
+	<style type="text/css">
+		.hero-unit {
+			position: relative;
+			background: transparent;
+		}
+		#map_canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%; 
+			height: 100%;
+			z-index: -1;
+			-webkit-border-radius: 5px;
+		}
+		.timeago {
+			color: #666;
+		}
+	</style>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<ul class="nav">
+					<li class="active">
+						<a href="#">Orbit</a>
+					</li>
+					<li><a href="#">About</a></li>
+				</ul>
+	    	</div>
+	  	</div>
+	</div>
+
+	<div class="container">
+		<header>
+			<div class="hero-unit">
+			  <h1>Orbit</h1>
+			  <p>Share links around your location</p>
+			  <p>
+			    <a href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://orbit2.herokuapp.com/javascripts/bookmarklet.js';})();" class="btn btn-primary btn-large">
+			      I'm a bookmarklet, drag me to your bookmarks
+			    </a>
+			  </p>
+			  <div id="map_canvas"></div>
+			</div>
+		</header>
+		<section>
+			<ul id="bookmarks" class="nav nav-tabs nav-stacked">
+			</ul>
+		</section>
+	</div>
+</body>
+</html>
